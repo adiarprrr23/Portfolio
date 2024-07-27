@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
+
 import { styles } from "../style";
+
 import { ComputersCanvas } from "./canvas";
-import { SectionWrapper } from "../hoc";
+// import { SectionWrapper } from "../hoc";
+import { hero_computer } from "../assets";
 
 const Hero = () => {
   return (
@@ -24,7 +27,14 @@ const Hero = () => {
         </div>
       </div>
 
-      <ComputersCanvas />
+      {/* <ComputersCanvas />  */}
+      <div className="absolute top-[250px] right-[35%]">
+      <img 
+      src={hero_computer} 
+      alt="hero_computer" 
+      />
+      </div>
+      
 
       <div className='absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center'>
         <a href='#about'>

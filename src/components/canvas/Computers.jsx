@@ -1,12 +1,14 @@
-import React, { Suspense,useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 
+// Component to load and render the computer model
 const Computers = ({ isMobile }) => {
   const { scene } = useGLTF("./desktop_pc/scene.gltf");
 
   useEffect(() => {
+    // Log geometry data for debugging
     scene.traverse((object) => {
       if (object.isMesh) {
         const geometry = object.geometry;
@@ -22,11 +24,27 @@ const Computers = ({ isMobile }) => {
         }
       }
     });
+
+    // Cleanup geometry and materials when unmounting
+    return () => {
+      scene.traverse((object) => {
+        if (object.isMesh) {
+          object.geometry.dispose();
+          if (object.material) {
+            if (Array.isArray(object.material)) {
+              object.material.forEach(material => material.dispose());
+            } else {
+              object.material.dispose();
+            }
+          }
+        }
+      });
+    };
   }, [scene]);
 
   return (
     <mesh>
-      <hemisphereLight intensity={1} groundColor="black" />
+      <hemisphereLight intensity={0.15} groundColor="black" />
       <spotLight
         position={[-20, 50, 10]}
         angle={0.12}
@@ -35,7 +53,7 @@ const Computers = ({ isMobile }) => {
         castShadow
         shadow-mapSize={1024}
       />
-      <pointLight intensity={3} />
+      <pointLight intensity={1} />
       <primitive
         object={scene}
         scale={isMobile ? 0.7 : 0.75}
@@ -46,6 +64,7 @@ const Computers = ({ isMobile }) => {
   );
 };
 
+// Main component to handle canvas rendering and mobile detection
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -68,7 +87,7 @@ const ComputersCanvas = () => {
     <Canvas
       frameloop="demand"
       camera={{ position: [20, 3, 5], fov: 25 }}
-      gl={{ preserveDrawingBuffer: true }}
+      gl={{ preserveDrawingBuffer: true }} // Use false unless you need to preserve the drawing buffer
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls

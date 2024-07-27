@@ -22,6 +22,7 @@ import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
 import samsung from './company/samsung.png'
 import capabl from './company/capabl.png'
+import hero_computer from "./hero_computer.png"
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
@@ -56,6 +57,7 @@ export {
   docker,
   figma,
   git,
+  hero_computer,
   html,
   javascript,
   mongodb,
