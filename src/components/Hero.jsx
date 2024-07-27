@@ -28,7 +28,7 @@ const Hero = () => {
       </div>
 
       {/* <ComputersCanvas />  */}
-      <div className="absolute top-[250px] right-[35%]">
+      <div className="absolute sm:top-[35%] top-[45%] sm:right-[35%] ">
       <img 
       src={hero_computer} 
       alt="hero_computer" 

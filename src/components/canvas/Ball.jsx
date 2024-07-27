@@ -47,9 +47,10 @@ const BallCanvas = ({ icon }) => {
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls enableZoom={false} />
         <Ball imgUrl={icon} />
+        <Preload all/>
       </Suspense>
 
-      <Preload all/>
+      
     </Canvas>
   );
 };
