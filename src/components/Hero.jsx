@@ -28,8 +28,9 @@ const Hero = () => {
       </div>
 
       {/* <ComputersCanvas />  */}
-      <div className="absolute sm:top-[35%] top-[45%] sm:right-[35%] ">
+      <div className="absolute w-auto sm:top-[35%] top-[38%] right-[10%] sm:right-[35%] md:right-[20%] lg:right-[38%]">
       <img 
+      className="max-w-[100%]"
       src={hero_computer} 
       alt="hero_computer" 
       />
