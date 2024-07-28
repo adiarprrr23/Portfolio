@@ -1,22 +1,36 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
-
 import CanvasLoader from "../Loader";
 
 const Earth = () => {
-  const earth = useGLTF("./planet/scene.gltf");
-  console.log(earth)
-  return (
-    <primitive object={earth.scene} scale={2.5} position-y={0} rotation-y={0} />
-  );
+  const { scene } = useGLTF("./planet/scene.gltf");
+
+  useEffect(() => {
+    // Log and sanitize positions to check for NaN values
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        const positions = child.geometry.attributes.position.array;
+        for (let i = 0; i < positions.length; i++) {
+          if (isNaN(positions[i])) {
+            console.error("NaN value found in positions:", positions[i]);
+            positions[i] = 0; // or some other default value
+          }
+        }
+        child.geometry.attributes.position.needsUpdate = true;
+        child.geometry.computeBoundingSphere();
+      }
+    });
+  }, [scene]);
+
+  return <primitive object={scene} scale={2.5} position-y={0} rotation-y={0} />;
 };
 
 const EarthCanvas = () => {
   return (
     <Canvas
       shadows
-      frameloop='demand'
+      frameloop="demand"
       dpr={[1, 2]}
       gl={{ preserveDrawingBuffer: true }}
       camera={{
@@ -34,7 +48,6 @@ const EarthCanvas = () => {
           minPolarAngle={Math.PI / 2}
         />
         <Earth />
-
         <Preload all />
       </Suspense>
     </Canvas>
