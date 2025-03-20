@@ -51,11 +51,11 @@ import {
   
   const services = [
     {
-      title: "Web Developer",
+      title: "Backend Developer",
       icon: web,
     },
     {
-      title: "React Developer",
+      title: "Frontend Developer",
       icon: mobile,
     },
     // {
@@ -210,7 +210,7 @@ import {
   
   const projects = [
     {
-      name: "Blogging Website",
+      name: "Vayu Vani Blogs",
       description:
         "Introducing our dynamic blogging platform that allows users to effortlessly create and edit posts using an intuitive text editor, preview their content before publishing, and securely sign in and log in to manage their blogs with ease.",
       tags: [
@@ -228,7 +228,7 @@ import {
         },
       ],
       image: BlogProject,
-      source_code_link: "https://github.com/adiarprrr23/BlogProject",
+      source_code_link: "https://vayu-vani-five.vercel.app/",
     },
     {
       name: "PILS",
